@@ -8,6 +8,19 @@
 
 import UIKit
 
+extension UIFont {
+
+  class var textStyle: UIFont {
+	return UIFont(name: "Salsa-Regular", size: 58.0)!
+  }
+
+	
+//  class var textStyle2: UIFont {
+//    return UIFont(name: "RobotoSlab-Thin", size: 20.0)
+//  }
+
+}
+
 class ViewController: UIViewController {
 	
 	let shapeLayer : CAShapeLayer = {
@@ -29,7 +42,9 @@ class ViewController: UIViewController {
 	let scoreLabel : UILabel = {
 		let label = UILabel()
 		label.text = "score: 5"
-		label.font = UIFont(name: "Arial", size: 58.0)
+//		label.backgroundColor = .red
+		label.translatesAutoresizingMaskIntoConstraints = false
+		label.font = UIFont.textStyle
 		label.textColor = UIColor(red: 254.0 / 255.0, green: 223.0 / 255.0, blue: 177.0 / 255.0, alpha: 1.0)
 		return label
 	}()
@@ -41,16 +56,75 @@ class ViewController: UIViewController {
 		return view
 	}()
 	
+	let topContainerView: UIView = {
+		let view = UIView()
+		view.backgroundColor = .systemPink
+		view.translatesAutoresizingMaskIntoConstraints = false
+		return view
+	}()
+	
 	let layerShapeContainer: UIView = {
 		let view = UIView()
 		view.translatesAutoresizingMaskIntoConstraints = false
 		return view
 	}()
 	
-	let imageView : UIImageView = {
+	let containerImageView : UIView = {
+		let view = UIView()
+		view.backgroundColor = .blue
+		view.translatesAutoresizingMaskIntoConstraints = false
+		return view
+	}()
+	
+	let imageView1 : UIImageView = {
 		let image = UIImageView()
 		image.image = UIImage(named: "kenny")
-		image.sizeToFit()
+		image.contentMode = .scaleAspectFit
+		image.translatesAutoresizingMaskIntoConstraints = false
+		image.backgroundColor = .green
+		return image
+	}()
+	
+	let imageView2 : UIImageView = {
+		let image = UIImageView()
+		image.image = UIImage(named: "kenny")
+		image.contentMode = .scaleAspectFit
+		image.translatesAutoresizingMaskIntoConstraints = false
+		image.backgroundColor = .green
+		return image
+	}()
+	
+	let imageView3 : UIImageView = {
+		let image = UIImageView()
+		image.image = UIImage(named: "kenny")
+		image.contentMode = .scaleAspectFit
+		image.translatesAutoresizingMaskIntoConstraints = false
+		image.backgroundColor = .green
+		return image
+	}()
+	
+	let imageView4 : UIImageView = {
+		let image = UIImageView()
+		image.image = UIImage(named: "kenny")
+		image.contentMode = .scaleAspectFit
+		image.translatesAutoresizingMaskIntoConstraints = false
+		image.backgroundColor = .green
+		return image
+	}()
+	
+	let imageView5 : UIImageView = {
+		let image = UIImageView()
+		image.image = UIImage(named: "kenny")
+		image.contentMode = .scaleAspectFit
+		image.translatesAutoresizingMaskIntoConstraints = false
+		image.backgroundColor = .green
+		return image
+	}()
+	
+	let imageView6 : UIImageView = {
+		let image = UIImageView()
+		image.image = UIImage(named: "kenny")
+		image.contentMode = .scaleAspectFit
 		image.translatesAutoresizingMaskIntoConstraints = false
 		image.backgroundColor = .green
 		return image
@@ -98,25 +172,52 @@ class ViewController: UIViewController {
 		containerView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
 		containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 		
-		containerView.addSubview(layerShapeContainer)
+		containerView.addSubview(topContainerView)
+		topContainerView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+		topContainerView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+		topContainerView.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
+		topContainerView.heightAnchor.constraint(equalToConstant: 237).isActive = true
+		
+		topContainerView.addSubview(layerShapeContainer)
 		layerShapeContainer.widthAnchor.constraint(equalToConstant: 132).isActive = true
 		layerShapeContainer.heightAnchor.constraint(equalToConstant: 132).isActive = true
-		layerShapeContainer.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 100).isActive = true
-		layerShapeContainer.centerXAnchor.constraint(equalTo: containerView.centerXAnchor, constant: 70).isActive = true
+		layerShapeContainer.topAnchor.constraint(equalTo: topContainerView.topAnchor, constant: 100).isActive = true
+		layerShapeContainer.centerXAnchor.constraint(equalTo: topContainerView.centerXAnchor, constant: 70).isActive = true
 
 		layerShapeContainer.layer.addSublayer(shapeLayer)
 		layerShapeContainer.addSubview(countDownLabel)
 		countDownLabel.frame = CGRect(x: 0, y: 100, width: 200, height: 100)
 		countDownLabel.center = layerShapeContainer.center
 		
-		containerView.addSubview(scoreLabel)
-		scoreLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-//		scoreLabel.widthAnchor.constraint(equalToConstant: 132).isActive = true
-//		scoreLabel.heightAnchor.constraint(equalToConstant: 132).isActive = true
-//		scoreLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 100).isActive = true
-//		scoreLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor, constant: 70).isActive = true
+		topContainerView.addSubview(scoreLabel)
+		scoreLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+		scoreLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 160).isActive = true
 		
-//		containerView.addSubview(imageView)
+		containerView.addSubview(containerImageView)
+		containerImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10).isActive = true
+		containerImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10).isActive = true
+		containerImageView.topAnchor.constraint(equalTo: topContainerView.topAnchor, constant: 200).isActive = true
+		
+		
+		containerImageView.addSubview(imageView1)
+//		containerImageView.addSubview(imageView2)
+//		containerImageView.addSubview(imageView3)
+//		containerImageView.addSubview(imageView4)
+//		containerImageView.addSubview(imageView5)
+//		containerImageView.addSubview(imageView6)
+		imageView1.widthAnchor.constraint(equalToConstant: 82).isActive = true
+		imageView1.heightAnchor.constraint(equalToConstant: 110).isActive = true
+		imageView1.topAnchor.constraint(equalTo: topContainerView.topAnchor, constant: 150).isActive = true
+		
+//		imageView2.widthAnchor.constraint(equalToConstant: 82).isActive = true
+//		imageView2.heightAnchor.constraint(equalToConstant: 110).isActive = true
+//		imageView2.topAnchor.constraint(equalTo: imageView1.topAnchor, constant: 150).isActive = true
+
+		
+
+//		imageView.topAnchor.constraint(equalTo: scoreLabel.topAnchor, constant: 75).isActive = true
+
+
 //		imageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
 //		imageView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
 //		imageView.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true

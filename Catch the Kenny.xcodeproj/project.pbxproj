@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90CEBE6024C6648A00068583 /* salsaregular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90CEBE5F24C6648A00068583 /* salsaregular.ttf */; };
 		90E1B86324BB78B800CD6261 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1B86224BB78B800CD6261 /* AppDelegate.swift */; };
 		90E1B86524BB78B800CD6261 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1B86424BB78B800CD6261 /* SceneDelegate.swift */; };
 		90E1B86724BB78B800CD6261 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E1B86624BB78B800CD6261 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		90CEBE5F24C6648A00068583 /* salsaregular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = salsaregular.ttf; sourceTree = "<group>"; };
 		90E1B85F24BB78B800CD6261 /* Catch the Kenny.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Catch the Kenny.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90E1B86224BB78B800CD6261 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90E1B86424BB78B800CD6261 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		90E1B86124BB78B800CD6261 /* Catch the Kenny */ = {
 			isa = PBXGroup;
 			children = (
+				90CEBE5F24C6648A00068583 /* salsaregular.ttf */,
 				90E1B86224BB78B800CD6261 /* AppDelegate.swift */,
 				90E1B86424BB78B800CD6261 /* SceneDelegate.swift */,
 				90E1B86624BB78B800CD6261 /* ViewController.swift */,
@@ -127,6 +130,7 @@
 			files = (
 				90E1B86F24BB78B900CD6261 /* LaunchScreen.storyboard in Resources */,
 				90E1B86C24BB78B900CD6261 /* Assets.xcassets in Resources */,
+				90CEBE6024C6648A00068583 /* salsaregular.ttf in Resources */,
 				90E1B86A24BB78B800CD6261 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
