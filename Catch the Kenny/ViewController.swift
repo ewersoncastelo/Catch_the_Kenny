@@ -60,29 +60,8 @@ class ViewController: UIViewController {
 		return label
 	}()
 	
-	// ViewContent
-	let containerView: UIView = {
-		let view = UIView()
-		view.translatesAutoresizingMaskIntoConstraints = false
-		return view
-	}()
-	
-	let topContainerView: UIView = {
-		let view = UIView()
-		view.backgroundColor = .systemPink
-		view.translatesAutoresizingMaskIntoConstraints = false
-		return view
-	}()
-	
 	let layerShapeContainer: UIView = {
 		let view = UIView()
-		view.translatesAutoresizingMaskIntoConstraints = false
-		return view
-	}()
-	
-	let containerImageView : UIView = {
-		let view = UIView()
-		view.backgroundColor = .blue
 		view.translatesAutoresizingMaskIntoConstraints = false
 		return view
 	}()
@@ -92,7 +71,6 @@ class ViewController: UIViewController {
 		image.image = UIImage(named: "kenny")
 		image.contentMode = .scaleAspectFit
 		image.translatesAutoresizingMaskIntoConstraints = false
-		image.backgroundColor = .green
 		image.isUserInteractionEnabled = true
 		return image
 	}()
@@ -102,7 +80,6 @@ class ViewController: UIViewController {
 		image.image = UIImage(named: "kenny")
 		image.contentMode = .scaleAspectFit
 		image.translatesAutoresizingMaskIntoConstraints = false
-		image.backgroundColor = .green
 		image.isUserInteractionEnabled = true
 		return image
 	}()
@@ -112,7 +89,6 @@ class ViewController: UIViewController {
 		image.image = UIImage(named: "kenny")
 		image.contentMode = .scaleAspectFit
 		image.translatesAutoresizingMaskIntoConstraints = false
-		image.backgroundColor = .green
 		image.isUserInteractionEnabled = true
 		return image
 	}()
@@ -122,7 +98,6 @@ class ViewController: UIViewController {
 		image.image = UIImage(named: "kenny")
 		image.contentMode = .scaleAspectFit
 		image.translatesAutoresizingMaskIntoConstraints = false
-		image.backgroundColor = .green
 		image.isUserInteractionEnabled = true
 		return image
 	}()
@@ -132,7 +107,6 @@ class ViewController: UIViewController {
 		image.image = UIImage(named: "kenny")
 		image.contentMode = .scaleAspectFit
 		image.translatesAutoresizingMaskIntoConstraints = false
-		image.backgroundColor = .green
 		image.isUserInteractionEnabled = true
 		return image
 	}()
@@ -142,7 +116,33 @@ class ViewController: UIViewController {
 		image.image = UIImage(named: "kenny")
 		image.contentMode = .scaleAspectFit
 		image.translatesAutoresizingMaskIntoConstraints = false
-		image.backgroundColor = .green
+		image.isUserInteractionEnabled = true
+		return image
+	}()
+	
+	let imageView7 : UIImageView = {
+		let image = UIImageView()
+		image.image = UIImage(named: "kenny")
+		image.contentMode = .scaleAspectFit
+		image.translatesAutoresizingMaskIntoConstraints = false
+		image.isUserInteractionEnabled = true
+		return image
+	}()
+	
+	let imageView8 : UIImageView = {
+		let image = UIImageView()
+		image.image = UIImage(named: "kenny")
+		image.contentMode = .scaleAspectFit
+		image.translatesAutoresizingMaskIntoConstraints = false
+		image.isUserInteractionEnabled = true
+		return image
+	}()
+	
+	let imageView9 : UIImageView = {
+		let image = UIImageView()
+		image.image = UIImage(named: "kenny")
+		image.contentMode = .scaleAspectFit
+		image.translatesAutoresizingMaskIntoConstraints = false
 		image.isUserInteractionEnabled = true
 		return image
 	}()
@@ -177,73 +177,69 @@ class ViewController: UIViewController {
 	}
 	
 	fileprivate func layoutMain() {
-		view.addSubview(containerView)
-		containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-		containerView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
-		containerView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
-		containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-		
-		containerView.addSubview(topContainerView)
-		topContainerView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-		topContainerView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-		topContainerView.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
-		topContainerView.heightAnchor.constraint(equalToConstant: 237).isActive = true
-		
-		topContainerView.addSubview(layerShapeContainer)
+
+		view.addSubview(layerShapeContainer)
 		layerShapeContainer.widthAnchor.constraint(equalToConstant: 132).isActive = true
 		layerShapeContainer.heightAnchor.constraint(equalToConstant: 132).isActive = true
-		layerShapeContainer.topAnchor.constraint(equalTo: topContainerView.topAnchor, constant: 100).isActive = true
-		layerShapeContainer.centerXAnchor.constraint(equalTo: topContainerView.centerXAnchor, constant: 70).isActive = true
+		layerShapeContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+		layerShapeContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 70).isActive = true
 		
 		layerShapeContainer.layer.addSublayer(shapeLayer)
 		layerShapeContainer.addSubview(timeLabel)
 		timeLabel.frame = CGRect(x: 0, y: 100, width: 200, height: 100)
 		timeLabel.center = layerShapeContainer.center
 		
-		topContainerView.addSubview(scoreLabel)
-		scoreLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-		scoreLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 160).isActive = true
+		view.addSubview(scoreLabel)
+		scoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+		scoreLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 160).isActive = true
 		
-		containerView.addSubview(containerImageView)
-		containerImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10).isActive = true
-		containerImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10).isActive = true
-		containerImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 250).isActive = true
-		
-		containerImageView.addSubview(imageView1)
-		containerImageView.addSubview(imageView2)
-		containerImageView.addSubview(imageView3)
-		containerImageView.addSubview(imageView4)
-		containerImageView.addSubview(imageView5)
-		containerImageView.addSubview(imageView6)
+		view.addSubview(imageView1)
+		view.addSubview(imageView2)
+		view.addSubview(imageView3)
+		view.addSubview(imageView4)
+		view.addSubview(imageView5)
+		view.addSubview(imageView6)
+		view.addSubview(imageView7)
+//		view.addSubview(imageView8)
+//		view.addSubview(imageView9)
 		imageView1.widthAnchor.constraint(equalToConstant: 82).isActive = true
 		imageView1.heightAnchor.constraint(equalToConstant: 110).isActive = true
-		imageView1.topAnchor.constraint(equalTo: containerImageView.topAnchor, constant: 0).isActive = true
+		imageView1.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100).isActive = true
+		imageView1.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
 		
 		imageView2.widthAnchor.constraint(equalToConstant: 82).isActive = true
 		imageView2.heightAnchor.constraint(equalToConstant: 110).isActive = true
-		imageView2.leftAnchor.constraint(equalTo: imageView1.leftAnchor, constant: 85).isActive = true
-		
+		imageView2.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100).isActive = true
+		imageView2.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
+
 		imageView3.widthAnchor.constraint(equalToConstant: 82).isActive = true
 		imageView3.heightAnchor.constraint(equalToConstant: 110).isActive = true
-		imageView3.leftAnchor.constraint(equalTo: imageView2.leftAnchor, constant: 85).isActive = true
-		
+		imageView3.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+		imageView3.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
+
 		imageView4.widthAnchor.constraint(equalToConstant: 82).isActive = true
 		imageView4.heightAnchor.constraint(equalToConstant: 110).isActive = true
-		imageView4.topAnchor.constraint(equalTo: imageView1.topAnchor, constant: 115).isActive = true
+		imageView4.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100).isActive = true
+		imageView4.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 110).isActive = true
 		
 		imageView5.widthAnchor.constraint(equalToConstant: 82).isActive = true
 		imageView5.heightAnchor.constraint(equalToConstant: 110).isActive = true
-		imageView5.topAnchor.constraint(equalTo: imageView2.topAnchor, constant: 115).isActive = true
-		imageView5.leftAnchor.constraint(equalTo: imageView4.leftAnchor, constant: 85).isActive = true
-		
+		imageView5.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100).isActive = true
+		imageView5.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 110).isActive = true
+
 		imageView6.widthAnchor.constraint(equalToConstant: 82).isActive = true
 		imageView6.heightAnchor.constraint(equalToConstant: 110).isActive = true
-		imageView6.topAnchor.constraint(equalTo: imageView3.topAnchor, constant: 115).isActive = true
-		imageView6.leftAnchor.constraint(equalTo: imageView5.leftAnchor, constant: 85).isActive = true
+		imageView6.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+		imageView6.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 110).isActive = true
 		
-		containerView.addSubview(highScoreLabel)
-		highScoreLabel.bottomAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-		highScoreLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor, constant: 0).isActive = true
+		imageView7.widthAnchor.constraint(equalToConstant: 82).isActive = true
+		imageView7.heightAnchor.constraint(equalToConstant: 110).isActive = true
+		imageView7.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100).isActive = true
+		imageView7.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 220).isActive = true
+
+		view.addSubview(highScoreLabel)
+		highScoreLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+		highScoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
 	}
 
 	override func viewDidLoad() {
@@ -262,6 +258,9 @@ class ViewController: UIViewController {
 		let recognizer4 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
 		let recognizer5 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
 		let recognizer6 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
+		let recognizer7 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
+		let recognizer8 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
+		let recognizer9 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
 		
 		// Add tapped animation in to screen
 //		view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
@@ -273,6 +272,9 @@ class ViewController: UIViewController {
 		imageView4.addGestureRecognizer(recognizer4)
 		imageView5.addGestureRecognizer(recognizer5)
 		imageView6.addGestureRecognizer(recognizer6)
+		imageView7.addGestureRecognizer(recognizer7)
+		imageView8.addGestureRecognizer(recognizer8)
+		imageView9.addGestureRecognizer(recognizer9)
 	}
 	
 	@objc func increaseScore(){
