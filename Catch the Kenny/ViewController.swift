@@ -24,6 +24,8 @@ extension UIFont {
 class ViewController: UIViewController {
 	
 	var score = 0
+	var timer = Timer()
+	var counter = 0
 	
 	let shapeLayer : CAShapeLayer = {
 		let shape = CAShapeLayer()
@@ -33,10 +35,11 @@ class ViewController: UIViewController {
 	// Countdown Label
 	let timeLabel : UILabel = {
 		let label = UILabel()
-		label.text = "10"
+		label.text = "Start"
 		label.textColor = UIColor(red: 1.0, green: 118.0 / 255.0, blue: 23.0 / 255.0, alpha: 1.0)
 		label.textAlignment = .center
-		label.font = UIFont.boldSystemFont(ofSize: 32)
+		label.font = UIFont.boldSystemFont(ofSize: 26)
+		label.isUserInteractionEnabled = true
 		return label
 	}()
 	
@@ -146,6 +149,36 @@ class ViewController: UIViewController {
 		image.isUserInteractionEnabled = true
 		return image
 	}()
+	
+	
+	let imageView10 : UIImageView = {
+		let image = UIImageView()
+		image.image = UIImage(named: "kenny")
+		image.contentMode = .scaleAspectFit
+		image.translatesAutoresizingMaskIntoConstraints = false
+		image.isUserInteractionEnabled = true
+		return image
+	}()
+	
+	
+	let imageView11 : UIImageView = {
+		let image = UIImageView()
+		image.image = UIImage(named: "kenny")
+		image.contentMode = .scaleAspectFit
+		image.translatesAutoresizingMaskIntoConstraints = false
+		image.isUserInteractionEnabled = true
+		return image
+	}()
+	
+	
+	let imageView12 : UIImageView = {
+		let image = UIImageView()
+		image.image = UIImage(named: "kenny")
+		image.contentMode = .scaleAspectFit
+		image.translatesAutoresizingMaskIntoConstraints = false
+		image.isUserInteractionEnabled = true
+		return image
+	}()
 
 	fileprivate func drawingCircle() {
 		//create track layer (shadonws)
@@ -176,12 +209,117 @@ class ViewController: UIViewController {
 		shapeLayer.strokeEnd = 0
 	}
 	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+			
+		view.backgroundColor = UIColor(white: 35.0 / 255.0, alpha: 1.0)
+		
+		drawingCircle()
+		
+		layoutMain()
+		
+		// Add tapped animation in to screen
+		timeLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(startGame)))
+
+		scoreLabel.text = "Score: \(score)"
+		let recognizer1 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
+		let recognizer2 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
+		let recognizer3 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
+		let recognizer4 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
+		let recognizer5 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
+		let recognizer6 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
+		let recognizer7 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
+		let recognizer8 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
+		let recognizer9 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
+		let recognizer10 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
+		let recognizer11 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
+		let recognizer12 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
+		
+		// Add tapped images game
+		imageView1.addGestureRecognizer(recognizer1)
+		imageView2.addGestureRecognizer(recognizer2)
+		imageView3.addGestureRecognizer(recognizer3)
+		imageView4.addGestureRecognizer(recognizer4)
+		imageView5.addGestureRecognizer(recognizer5)
+		imageView6.addGestureRecognizer(recognizer6)
+		imageView7.addGestureRecognizer(recognizer7)
+		imageView8.addGestureRecognizer(recognizer8)
+		imageView9.addGestureRecognizer(recognizer9)
+		imageView10.addGestureRecognizer(recognizer10)
+		imageView11.addGestureRecognizer(recognizer11)
+		imageView12.addGestureRecognizer(recognizer12)
+
+	}
+	
+	fileprivate func disableGestureStart() {
+		for gesture in timeLabel.gestureRecognizers! {
+			gesture.isEnabled = false
+		}
+	}
+	
+	@objc func startGame() {
+		
+		disableGestureStart()
+				
+		animatedCircle()
+		
+		// Timers
+		counter = 15
+		timeLabel.text = String(counter)
+		timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(beginTimeCountDown), userInfo: nil, repeats: true)
+	}
+	
+	@objc func beginTimeCountDown(){
+		shapeLayer.strokeEnd = 0
+		
+		counter -= 1
+		
+		timeLabel.text = String(counter)
+		
+		if(counter == 0){
+			timer.invalidate()
+			
+			disableGestureStart()
+
+			let alert = UIAlertController(title: "Time's up", message: "Do you to play again?", preferredStyle: .alert)
+			let okButton = UIAlertAction(title: "OK", style: .cancel) { (UIAlertAction) in
+				// Stop the game
+				self.timeLabel.text = "Start"
+			}
+			let replayButton = UIAlertAction(title: "Replay", style: .default) { (UIAlertAction) in
+				//replay function
+				self.timeLabel.text = "15"
+				self.startGame()
+			}
+			alert.addAction(okButton)
+			alert.addAction(replayButton)
+			self.present(alert, animated: true, completion: nil)
+		}
+		
+	}
+	
+	fileprivate func animatedCircle() {
+		// catch tapped in to screen and make animation
+		let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
+		basicAnimation.toValue = 1
+		basicAnimation.duration = 15
+		basicAnimation.fillMode = .forwards
+		basicAnimation.isRemovedOnCompletion = true
+		shapeLayer.add(basicAnimation, forKey: "urSoBasic")
+	}
+	
+	@objc func increaseScore(){
+		print("tapped increase score")
+		score += 1
+		scoreLabel.text = "Score: \(score)"
+	}
+
 	fileprivate func layoutMain() {
 
 		view.addSubview(layerShapeContainer)
 		layerShapeContainer.widthAnchor.constraint(equalToConstant: 132).isActive = true
 		layerShapeContainer.heightAnchor.constraint(equalToConstant: 132).isActive = true
-		layerShapeContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+		layerShapeContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
 		layerShapeContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 70).isActive = true
 		
 		layerShapeContainer.layer.addSublayer(shapeLayer)
@@ -191,7 +329,7 @@ class ViewController: UIViewController {
 		
 		view.addSubview(scoreLabel)
 		scoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-		scoreLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 160).isActive = true
+		scoreLabel.topAnchor.constraint(equalTo: layerShapeContainer.topAnchor, constant: 60).isActive = true
 		
 		view.addSubview(imageView1)
 		view.addSubview(imageView2)
@@ -200,8 +338,26 @@ class ViewController: UIViewController {
 		view.addSubview(imageView5)
 		view.addSubview(imageView6)
 		view.addSubview(imageView7)
-//		view.addSubview(imageView8)
-//		view.addSubview(imageView9)
+		view.addSubview(imageView8)
+		view.addSubview(imageView9)
+		view.addSubview(imageView10)
+		view.addSubview(imageView11)
+		view.addSubview(imageView12)
+		imageView10.widthAnchor.constraint(equalToConstant: 82).isActive = true
+		imageView10.heightAnchor.constraint(equalToConstant: 110).isActive = true
+		imageView10.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100).isActive = true
+		imageView10.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -110).isActive = true
+		
+		imageView11.widthAnchor.constraint(equalToConstant: 82).isActive = true
+		imageView11.heightAnchor.constraint(equalToConstant: 110).isActive = true
+		imageView11.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+		imageView11.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -110).isActive = true
+		
+		imageView12.widthAnchor.constraint(equalToConstant: 82).isActive = true
+		imageView12.heightAnchor.constraint(equalToConstant: 110).isActive = true
+		imageView12.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100).isActive = true
+		imageView12.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -110).isActive = true
+		
 		imageView1.widthAnchor.constraint(equalToConstant: 82).isActive = true
 		imageView1.heightAnchor.constraint(equalToConstant: 110).isActive = true
 		imageView1.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100).isActive = true
@@ -236,74 +392,21 @@ class ViewController: UIViewController {
 		imageView7.heightAnchor.constraint(equalToConstant: 110).isActive = true
 		imageView7.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100).isActive = true
 		imageView7.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 220).isActive = true
+		
+		imageView8.widthAnchor.constraint(equalToConstant: 82).isActive = true
+		imageView8.heightAnchor.constraint(equalToConstant: 110).isActive = true
+		imageView8.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+		imageView8.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 220).isActive = true
+		
+		imageView9.widthAnchor.constraint(equalToConstant: 82).isActive = true
+		imageView9.heightAnchor.constraint(equalToConstant: 110).isActive = true
+		imageView9.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100).isActive = true
+		imageView9.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 220).isActive = true
 
 		view.addSubview(highScoreLabel)
 		highScoreLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
 		highScoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
 	}
-
-	override func viewDidLoad() {
-		super.viewDidLoad()
-			
-		view.backgroundColor = UIColor(white: 35.0 / 255.0, alpha: 1.0)
-		
-		drawingCircle()
-		
-		layoutMain()
-
-		scoreLabel.text = "Score: \(score)"
-		let recognizer1 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
-		let recognizer2 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
-		let recognizer3 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
-		let recognizer4 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
-		let recognizer5 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
-		let recognizer6 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
-		let recognizer7 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
-		let recognizer8 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
-		let recognizer9 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
-		
-		// Add tapped animation in to screen
-//		view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
-		
-		// Add tapped images game
-		imageView1.addGestureRecognizer(recognizer1)
-		imageView2.addGestureRecognizer(recognizer2)
-		imageView3.addGestureRecognizer(recognizer3)
-		imageView4.addGestureRecognizer(recognizer4)
-		imageView5.addGestureRecognizer(recognizer5)
-		imageView6.addGestureRecognizer(recognizer6)
-		imageView7.addGestureRecognizer(recognizer7)
-		imageView8.addGestureRecognizer(recognizer8)
-		imageView9.addGestureRecognizer(recognizer9)
-	}
-	
-	@objc func increaseScore(){
-		print("tapped increase score")
-		score += 1
-		scoreLabel.text = "Score: \(score)"
-	}
-	
-	private func beginTimeCountDown(){
-		print("start timer")
-		shapeLayer.strokeEnd = 0
-	}
-	
-	fileprivate func animatedCircle() {
-		// catch tapped in to screen and make animation
-		let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
-		basicAnimation.toValue = 1
-		basicAnimation.duration = 2
-		basicAnimation.fillMode = .forwards
-		basicAnimation.isRemovedOnCompletion = false
-		shapeLayer.add(basicAnimation, forKey: "urSoBasic")
-	}
-	
-	@objc private func handleTap(){
-		beginTimeCountDown()
-		
-		animatedCircle()
-	}
-
 
 }
 
