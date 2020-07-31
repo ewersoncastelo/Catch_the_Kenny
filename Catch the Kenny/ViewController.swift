@@ -26,6 +26,8 @@ class ViewController: UIViewController {
 	var score = 0
 	var timer = Timer()
 	var counter = 0
+	var imageArray = [UIImageView]()
+	var hideTimer = Timer()
 	
 	let shapeLayer : CAShapeLayer = {
 		let shape = CAShapeLayer()
@@ -248,7 +250,25 @@ class ViewController: UIViewController {
 		imageView10.addGestureRecognizer(recognizer10)
 		imageView11.addGestureRecognizer(recognizer11)
 		imageView12.addGestureRecognizer(recognizer12)
-
+		
+		imageArray = [imageView1, imageView2, imageView3, imageView4, imageView5, imageView6, imageView7, imageView8, imageView9, imageView10, imageView11, imageView12]
+		
+		hidenImageArray()
+		imageArray[2].isHidden = false
+	}
+	
+	fileprivate func hidenImageArray() {
+		for image in imageArray {
+			image.isHidden = true
+		}
+	}
+	
+	@objc func hiddenImage() {
+		hidenImageArray()
+		
+		let random = Int(arc4random_uniform(UInt32(imageArray.count)))
+		imageArray[random].isHidden = false
+		
 	}
 	
 	fileprivate func disableGestureStart() {
@@ -262,6 +282,8 @@ class ViewController: UIViewController {
 		disableGestureStart()
 				
 		animatedCircle()
+		
+		hideTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(hiddenImage), userInfo: nil, repeats: true)
 		
 		// Timers
 		counter = 15
@@ -278,8 +300,11 @@ class ViewController: UIViewController {
 		
 		if(counter == 0){
 			timer.invalidate()
+			hideTimer.invalidate()
 			
 			disableGestureStart()
+			
+			hidenImageArray()
 
 			let alert = UIAlertController(title: "Time's up", message: "Do you to play again?", preferredStyle: .alert)
 			let okButton = UIAlertAction(title: "OK", style: .cancel) { (UIAlertAction) in
