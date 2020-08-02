@@ -28,6 +28,7 @@ class ViewController: UIViewController {
 	var counter = 0
 	var imageArray = [UIImageView]()
 	var hideTimer = Timer()
+	var highScore = 0
 	
 	let shapeLayer : CAShapeLayer = {
 		let shape = CAShapeLayer()
@@ -211,6 +212,16 @@ class ViewController: UIViewController {
 		shapeLayer.strokeEnd = 0
 	}
 	
+	fileprivate func newHighScoreCheck() {
+		// Check users HighScore
+		let storedHighscore = UserDefaults.standard.object(forKey: "highscore")
+		
+		if let newScore = storedHighscore as? Int {
+			highScore = newScore
+			highScoreLabel.text = "highscore: \(highScore)"
+		}
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 			
@@ -222,6 +233,8 @@ class ViewController: UIViewController {
 		
 		// Add tapped animation in to screen
 		timeLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(startGame)))
+		
+		newHighScoreCheck()
 
 		scoreLabel.text = "Score: \(score)"
 		let recognizer1 = UITapGestureRecognizer(target: self, action: #selector(increaseScore))
@@ -302,18 +315,33 @@ class ViewController: UIViewController {
 			timer.invalidate()
 			hideTimer.invalidate()
 			
+			// Disable Button
 			disableGestureStart()
 			
+			// Hidden Kenny Images
 			hidenImageArray()
+			
+			// Set HighScore Data
+			if self.score > self.highScore {
+				self.highScore = self.score
+				self.highScoreLabel.text = "highscore: \(self.highScore)"
+				UserDefaults.standard.set(self.highScore, forKey: "highscore")
+			}
+			
+			
 
 			let alert = UIAlertController(title: "Time's up", message: "Do you to play again?", preferredStyle: .alert)
 			let okButton = UIAlertAction(title: "OK", style: .cancel) { (UIAlertAction) in
 				// Stop the game
 				self.timeLabel.text = "Start"
+				self.score = 0
+				self.scoreLabel.text = "Score: \(self.score)"
 			}
 			let replayButton = UIAlertAction(title: "Replay", style: .default) { (UIAlertAction) in
 				//replay function
 				self.timeLabel.text = "15"
+				self.score = 0
+				self.scoreLabel.text = "Score: \(self.score)"
 				self.startGame()
 			}
 			alert.addAction(okButton)
