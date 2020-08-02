@@ -56,7 +56,7 @@ class ViewController: UIViewController {
 		return label
 	}()
 	
-	// Score Label
+	// HighScore Label
 	let highScoreLabel : UILabel = {
 		let label = UILabel()
 		label.text = "record 0"
@@ -66,10 +66,30 @@ class ViewController: UIViewController {
 		return label
 	}()
 	
+	// LabelTextBotton
+	let labelTextBottom : UILabel = {
+		let label = UILabel()
+		label.text = "You must be try catch kenny logo! if you can!"
+		label.font = UIFont.textStyle2
+		label.translatesAutoresizingMaskIntoConstraints = false
+		label.textColor = UIColor(red: 1.0, green: 224.0 / 255.0, blue: 178.0 / 255.0, alpha: 1.0)
+		label.numberOfLines = 2
+		return label
+	}()
+	
 	let layerShapeContainer: UIView = {
 		let view = UIView()
 		view.translatesAutoresizingMaskIntoConstraints = false
 		return view
+	}()
+	
+	let imageViewIcon : UIImageView = {
+		let image = UIImageView()
+		image.image = UIImage(named: "iconGame")
+		image.contentMode = .scaleAspectFit
+		image.translatesAutoresizingMaskIntoConstraints = false
+		image.isUserInteractionEnabled = true
+		return image
 	}()
 	
 	let imageView1 : UIImageView = {
@@ -384,7 +404,6 @@ class ViewController: UIViewController {
 
 		view.addSubview(layerShapeContainer)
 		layerShapeContainer.widthAnchor.constraint(equalToConstant: 132).isActive = true
-//		layerShapeContainer.heightAnchor.constraint(equalToConstant: 132).isActive = true
 		layerShapeContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 72).isActive = true
 		layerShapeContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 67).isActive = true
 		
@@ -473,9 +492,14 @@ class ViewController: UIViewController {
 		imageView9.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100).isActive = true
 		imageView9.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 220).isActive = true
 
-//		view.addSubview(highScoreLabel)
-//		highScoreLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-//		highScoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+		view.addSubview(imageViewIcon)
+		imageViewIcon.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+		imageViewIcon.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100).isActive = true
+		
+		view.addSubview(labelTextBottom)
+		labelTextBottom.widthAnchor.constraint(equalToConstant: 235).isActive = true
+		labelTextBottom.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+		labelTextBottom.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 40).isActive = true
 	}
 
 }
