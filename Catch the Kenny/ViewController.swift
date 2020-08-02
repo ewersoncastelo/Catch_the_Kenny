@@ -212,16 +212,6 @@ class ViewController: UIViewController {
 		shapeLayer.strokeEnd = 0
 	}
 	
-	fileprivate func newHighScoreCheck() {
-		// Check users HighScore
-		let storedHighscore = UserDefaults.standard.object(forKey: "highscore")
-		
-		if let newScore = storedHighscore as? Int {
-			highScore = newScore
-			highScoreLabel.text = "highscore: \(highScore)"
-		}
-	}
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 			
@@ -232,7 +222,7 @@ class ViewController: UIViewController {
 		layoutMain()
 		
 		// Add tapped animation in to screen
-		timeLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(startGame)))
+		view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(startGame)))
 		
 		newHighScoreCheck()
 
@@ -267,7 +257,26 @@ class ViewController: UIViewController {
 		imageArray = [imageView1, imageView2, imageView3, imageView4, imageView5, imageView6, imageView7, imageView8, imageView9, imageView10, imageView11, imageView12]
 		
 		hidenImageArray()
-		imageArray[2].isHidden = false
+	
+		// Disable gesture for start game
+		disableFirstGestureImage()
+	}
+	
+	fileprivate func disableFirstGestureImage() {
+		for gesture in imageArray[2].gestureRecognizers! {
+			imageArray[2].isHidden = false
+			gesture.isEnabled = false
+		}
+	}
+	
+	fileprivate func newHighScoreCheck() {
+		// Check users HighScore
+		let storedHighscore = UserDefaults.standard.object(forKey: "highscore")
+		
+		if let newScore = storedHighscore as? Int {
+			highScore = newScore
+			highScoreLabel.text = "highscore: \(highScore)"
+		}
 	}
 	
 	fileprivate func hidenImageArray() {
@@ -285,7 +294,7 @@ class ViewController: UIViewController {
 	}
 	
 	fileprivate func disableGestureStart() {
-		for gesture in timeLabel.gestureRecognizers! {
+		for gesture in view.gestureRecognizers! {
 			gesture.isEnabled = false
 		}
 	}
@@ -327,12 +336,16 @@ class ViewController: UIViewController {
 				self.highScoreLabel.text = "highscore: \(self.highScore)"
 				UserDefaults.standard.set(self.highScore, forKey: "highscore")
 			}
-			
-			
 
 			let alert = UIAlertController(title: "Time's up", message: "Do you to play again?", preferredStyle: .alert)
 			let okButton = UIAlertAction(title: "OK", style: .cancel) { (UIAlertAction) in
 				// Stop the game
+		
+				for gesture in self.view.gestureRecognizers! {
+					self.imageArray[2].isHidden = false
+					gesture.isEnabled = true
+				}
+				
 				self.timeLabel.text = "Start"
 				self.score = 0
 				self.scoreLabel.text = "Score: \(self.score)"
