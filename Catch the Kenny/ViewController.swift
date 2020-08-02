@@ -59,10 +59,10 @@ class ViewController: UIViewController {
 	// Score Label
 	let highScoreLabel : UILabel = {
 		let label = UILabel()
-		label.text = "highscore: 0"
+		label.text = "record 0"
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = UIFont.textStyle2
-		label.textColor = UIColor(red: 254.0 / 255.0, green: 223.0 / 255.0, blue: 177.0 / 255.0, alpha: 1.0)
+		label.textColor = UIColor(red: 62.0 / 255.0, green: 185.0 / 255.0, blue: 1.0, alpha: 1.0)
 		return label
 	}()
 	
@@ -275,7 +275,7 @@ class ViewController: UIViewController {
 		
 		if let newScore = storedHighscore as? Int {
 			highScore = newScore
-			highScoreLabel.text = "highscore: \(highScore)"
+			highScoreLabel.text = "record \(highScore)"
 		}
 	}
 	
@@ -333,7 +333,7 @@ class ViewController: UIViewController {
 			// Set HighScore Data
 			if self.score > self.highScore {
 				self.highScore = self.score
-				self.highScoreLabel.text = "highscore: \(self.highScore)"
+				self.highScoreLabel.text = "record \(self.highScore)"
 				UserDefaults.standard.set(self.highScore, forKey: "highscore")
 			}
 
@@ -384,9 +384,9 @@ class ViewController: UIViewController {
 
 		view.addSubview(layerShapeContainer)
 		layerShapeContainer.widthAnchor.constraint(equalToConstant: 132).isActive = true
-		layerShapeContainer.heightAnchor.constraint(equalToConstant: 132).isActive = true
-		layerShapeContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
-		layerShapeContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 70).isActive = true
+//		layerShapeContainer.heightAnchor.constraint(equalToConstant: 132).isActive = true
+		layerShapeContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 72).isActive = true
+		layerShapeContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 67).isActive = true
 		
 		layerShapeContainer.layer.addSublayer(shapeLayer)
 		layerShapeContainer.addSubview(timeLabel)
@@ -396,6 +396,10 @@ class ViewController: UIViewController {
 		view.addSubview(scoreLabel)
 		scoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		scoreLabel.topAnchor.constraint(equalTo: layerShapeContainer.topAnchor, constant: 60).isActive = true
+		
+		view.addSubview(highScoreLabel)
+		highScoreLabel.topAnchor.constraint(equalTo: scoreLabel.topAnchor, constant: 70).isActive = true
+		highScoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
 		
 		view.addSubview(imageView1)
 		view.addSubview(imageView2)
@@ -469,9 +473,9 @@ class ViewController: UIViewController {
 		imageView9.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100).isActive = true
 		imageView9.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 220).isActive = true
 
-		view.addSubview(highScoreLabel)
-		highScoreLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-		highScoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+//		view.addSubview(highScoreLabel)
+//		highScoreLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+//		highScoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
 	}
 
 }
