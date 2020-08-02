@@ -232,14 +232,20 @@ class ViewController: UIViewController {
 		shapeLayer.strokeEnd = 0
 	}
 	
+	// Hidden Status Bar
+	override var prefersStatusBarHidden: Bool {
+		return true
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 			
 		view.backgroundColor = UIColor(white: 35.0 / 255.0, alpha: 1.0)
 		
 		drawingCircle()
-		
+
 		layoutMain()
+	
 		
 		// Add tapped animation in to screen
 		view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(startGame)))
