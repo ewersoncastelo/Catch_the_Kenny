@@ -3,7 +3,7 @@
 </h1>
 
 <h4 align="left">
-  Try cath the Kenny Image and Make the best record for game.
+  Try catch the Kenny Image and Make the best highscore for game.
 </h4>
 
 <p align="left">
@@ -18,6 +18,10 @@
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ewersoncastelo/Catch_the_Kenny.svg">
   </a>
 </p>
+
+## Preview
+
+![](Catch_the_Kenny.gif)
 
 ## Instalation
 
